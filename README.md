@@ -13,7 +13,7 @@
 
 ---
 
-## 🖼️ Screenshots (Recommended)
+## 🖼️ Screenshots
 
 Please include these screenshots in a `screenshots/` folder and link them here in the README.
 
