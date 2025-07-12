@@ -1,8 +1,10 @@
+// Run all logic after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   let currentPage = 1;
   let itemsPerPageGlobal = 10;
-  let filteredEmployees = [...mockEmployees];
+  let filteredEmployees = [...mockEmployees]; // Clone the original data for filtering and pagination
 
+  // ✅ Render employees to the DOM
   function renderEmployees() {
     const start = (currentPage - 1) * itemsPerPageGlobal;
     const paginatedEmployees = filteredEmployees.slice(start, start + itemsPerPageGlobal);
@@ -26,21 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(div);
     });
 
-    const pageText = filteredEmployees.length
-      ? `Page ${currentPage} of ${Math.ceil(filteredEmployees.length / itemsPerPageGlobal)}`
-      : "";
-    document.getElementById("pageIndicator").innerText = pageText;
+    const totalPages = Math.ceil(filteredEmployees.length / itemsPerPageGlobal);
+    document.getElementById("pageIndicator").innerText = 
+      filteredEmployees.length ? `Page ${currentPage} of ${totalPages}` : "";
   }
 
- window.showForm = function () {
-  document.getElementById("employeeFormContainer").style.display = "flex";
-  document.getElementById("formTitle").innerText = "Add Employee";
-  document.getElementById("employeeForm").reset();
-  document.getElementById("employeeId").value = "";
-};
+  // ✅ Show Add/Edit Modal
+  window.showForm = function () {
+    document.getElementById("employeeFormContainer").style.display = "flex";
+    document.getElementById("formTitle").innerText = "Add Employee";
+    document.getElementById("employeeForm").reset();
+    document.getElementById("employeeId").value = "";
+  };
 
-
-
+  // ✅ Edit an existing employee
   window.editEmployee = function(id) {
     const emp = mockEmployees.find(e => e.id === id);
     if (emp) {
@@ -55,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // ✅ Delete an employee
   window.deleteEmployee = function(id) {
     const index = mockEmployees.findIndex(e => e.id === id);
     if (index !== -1) {
@@ -63,12 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // ✅ Hide the form modal
   function hideForm() {
     document.getElementById("employeeFormContainer").style.display = "none";
   }
-
   window.hideForm = hideForm;
 
+  // ✅ Handle form submission for Add/Edit
   document.getElementById("employeeForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const id = document.getElementById("employeeId").value;
@@ -80,16 +83,19 @@ document.addEventListener("DOMContentLoaded", () => {
       department: document.getElementById("department").value,
       role: document.getElementById("role").value,
     };
+
     if (id) {
       const idx = mockEmployees.findIndex(e => e.id == id);
       mockEmployees[idx] = newEmp;
     } else {
       mockEmployees.push(newEmp);
     }
+
     hideForm();
     applyFilters();
   });
 
+  // ✅ Apply search filter
   function applyFilters() {
     const value = document.getElementById("searchInput").value.toLowerCase();
     filteredEmployees = mockEmployees.filter(emp =>
@@ -101,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderEmployees();
   }
 
+  // ✅ Apply advanced filter form (first name, dept, role)
   function applyFilterForm() {
     const firstName = document.getElementById("filterFirstName").value.trim().toLowerCase();
     const department = document.getElementById("filterDepartment").value.trim().toLowerCase();
@@ -127,9 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
       renderEmployees();
     }
   }
-
   window.applyFilterForm = applyFilterForm;
 
+  // ✅ Reset filter form to show all employees
   function resetFilterForm() {
     document.getElementById("filterFirstName").value = "";
     document.getElementById("filterDepartment").value = "";
@@ -138,10 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
     currentPage = 1;
     renderEmployees();
   }
-
   window.resetFilterForm = resetFilterForm;
 
-  // Pagination
+  // ✅ Pagination: Previous Page
   document.getElementById("prevPage").addEventListener("click", () => {
     if (currentPage > 1) {
       currentPage--;
@@ -149,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ✅ Pagination: Next Page
   document.getElementById("nextPage").addEventListener("click", () => {
     const totalPages = Math.ceil(filteredEmployees.length / itemsPerPageGlobal);
     if (currentPage < totalPages) {
@@ -157,8 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ✅ Trigger live search filter
   document.getElementById("searchInput").addEventListener("input", applyFilters);
 
+  // ✅ Sort dropdown logic
   document.getElementById("sortSelect").addEventListener("change", () => {
     const sortKey = document.getElementById("sortSelect").value;
     if (sortKey) {
@@ -168,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ✅ Show dropdown logic
   document.getElementById("itemsPerPage").addEventListener("change", () => {
     const value = parseInt(document.getElementById("itemsPerPage").value);
     itemsPerPageGlobal = value;
@@ -175,10 +185,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderEmployees();
   });
 
+  // ✅ Toggle the filter sidebar
   document.getElementById("filterToggle").addEventListener("click", () => {
     const form = document.getElementById("filterForm");
     form.classList.toggle("hidden");
   });
 
-  applyFilters(); // initial load
+  // ✅ Initial render
+  applyFilters();
 });

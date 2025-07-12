@@ -1,9 +1,15 @@
+/* ---------------------------------------
+   Global Styles
+---------------------------------------- */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f1f1f1;
 }
 
+/* ---------------------------------------
+   Top Bar / Header
+---------------------------------------- */
 .top-bar {
   background-color: #2c2c2c;
   color: white;
@@ -13,6 +19,9 @@ body {
   align-items: center;
 }
 
+/* ---------------------------------------
+   Search Bar Styles
+---------------------------------------- */
 .search-bar {
   display: flex;
   gap: 10px;
@@ -32,6 +41,9 @@ body {
   cursor: pointer;
 }
 
+/* ---------------------------------------
+   Toolbar (Sort + Add Employee)
+---------------------------------------- */
 .toolbar {
   display: flex;
   justify-content: space-between;
@@ -54,6 +66,9 @@ body {
   cursor: pointer;
 }
 
+/* ---------------------------------------
+   Employee Grid
+---------------------------------------- */
 .employee-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -61,6 +76,9 @@ body {
   padding: 20px;
 }
 
+/* ---------------------------------------
+   Employee Card Styles
+---------------------------------------- */
 .employee-card {
   background-color: white;
   padding: 15px;
@@ -90,16 +108,19 @@ body {
 }
 
 .employee-card button:first-child {
-  background-color: #6c5ce7;
+  background-color: #6c5ce7; /* Edit button */
   color: white;
 }
 
 .employee-card button:last-child {
-  background-color: #eeeeee;
+  background-color: #eeeeee; /* Delete button */
   color: #333;
   border: 1px solid #ccc;
 }
 
+/* ---------------------------------------
+   Pagination Controls
+---------------------------------------- */
 .pagination-controls {
   display: flex;
   justify-content: center;
@@ -108,6 +129,9 @@ body {
   gap: 10px;
 }
 
+/* ---------------------------------------
+   Footer
+---------------------------------------- */
 footer {
   background-color: #2c2c2c;
   color: white;
@@ -115,6 +139,9 @@ footer {
   text-align: center;
 }
 
+/* ---------------------------------------
+   Layout Structure
+---------------------------------------- */
 .main-content {
   display: flex;
   position: relative;
@@ -125,6 +152,9 @@ footer {
   padding: 20px;
 }
 
+/* ---------------------------------------
+   Filter Sidebar Form
+---------------------------------------- */
 .filter-form {
   position: absolute;
   right: 0;
@@ -139,6 +169,7 @@ footer {
   transition: transform 0.3s ease;
 }
 
+/* Hide filter form using transform */
 .filter-form.hidden {
   transform: translateX(100%);
 }
@@ -172,21 +203,25 @@ footer {
 }
 
 .filter-buttons button:first-child {
-  background-color: #333;
+  background-color: #333; /* Apply button */
   color: white;
 }
 
 .filter-buttons button:last-child {
-  background-color: #eeeeee;
+  background-color: #eeeeee; /* Reset button */
   color: #333;
   border: 1px solid #ccc;
 }
 
+/* Hover styles for interactive buttons */
 .employee-card button:hover,
 .filter-buttons button:hover {
   opacity: 0.9;
 }
 
+/* ---------------------------------------
+   Modal Form Styles (Add/Edit)
+---------------------------------------- */
 .form-modal {
   position: fixed;
   top: 0;
@@ -230,6 +265,9 @@ footer {
   border: 1px solid #ccc;
 }
 
+/* ---------------------------------------
+   Form Grid Layout for Inputs
+---------------------------------------- */
 .form-row {
   display: flex;
   gap: 10px;
@@ -265,6 +303,9 @@ footer {
   color: black;
 }
 
+/* ---------------------------------------
+   Responsive Styles (Tablet & Mobile)
+---------------------------------------- */
 @media (max-width: 768px) {
   .filter-form {
     width: 100%;
